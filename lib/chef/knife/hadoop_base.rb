@@ -17,11 +17,11 @@
 #
 
 require 'chef/knife'
-require 'ucslib'
+require 'webhdfs'
 
 class Chef
   class Knife
-    module UCSBase
+    module HadoopBase
 
       def self.included(includer)
         includer.class_eval do
@@ -31,39 +31,41 @@ class Chef
             require 'chef/json_compat'
           end
 
-          option :ucsm_username,
+          option :namenode_username,
             :short => "-U USERNAME",
-            :long => "--cisco-ucsm-username USERNAME",
-            :description => "Your Cisco UCS Manager Username",
-            :proc => Proc.new { |key| Chef::Config[:knife][:ucsm_username] = key }
+            :long => "--namenode-username USERNAME",
+            :description => "NameNode Username",
+            :proc => Proc.new { |key| Chef::Config[:knife][:namenode_username] = key }
 
-          option :ucsm_password,
+          option :namenode_password,
             :short => "-P PASSWORD",
-            :long => "--cisco-ucsm-password PASSWORD",
-            :description => "Your Cisco UCS Manager password",
-            :proc => Proc.new { |key| Chef::Config[:knife][:ucsm_password] = key }
+            :long => "--namenode-password PASSWORD",
+            :description => "NameNode password",
+            :proc => Proc.new { |key| Chef::Config[:knife][:namenode_password] = key }
 
-          option :ucsm_host,
+          option :namenode_host,
             :short => "-H HOST",
-            :long => "--cisco-ucsm-host HOST",
-            :description => "Your Cisco UCS Manager FI name or IP address",
-            :proc => Proc.new { |endpoint| Chef::Config[:knife][:ucsm_host] = endpoint }
+            :long => "--namenode-host HOST",
+            :description => "NameNode FQDN or IP address",
+            :proc => Proc.new { |endpoint| Chef::Config[:knife][:namenode_host] = endpoint }
 
+          option :namenode_port,
+            :short => "-A PORT",
+            :long => "--namenode-port PORT",
+            :description => "NameNode port",
+            :proc => Proc.new { |key| Chef::Config[:knife][:namenode_port] = key }
           
         end
       end
 
       def connection
-        ucs_session = UCSToken.new
-        Chef::Log.debug("username: #{Chef::Config[:knife][:ucsm_username]}")
-        Chef::Log.debug("password: #{Chef::Config[:knife][:ucsm_password]}")
-        Chef::Log.debug("host:     #{Chef::Config[:knife][:ucsm_host]}")
+        Chef::Log.debug("username: #{Chef::Config[:knife][:namenode_username]}")
+        Chef::Log.debug("password: #{Chef::Config[:knife][:namenode_password]}")
+        Chef::Log.debug("host:     #{Chef::Config[:knife][:namenode_host]}")
+        Chef::Log.debug("port:     #{Chef::Config[:knife][:namenode_port]}")
         @connection ||= begin
-          connection = ucs_session.get_token({
-            :username => Chef::Config[:knife][:ucsm_username],
-            :password => Chef::Config[:knife][:ucsm_password],
-            :ip       => Chef::Config[:knife][:ucsm_host]
-          }.to_json)
+          connection = WebHDFS::Client.new("#{Chef::Config[:knife][:namenode_host]}", 
+                                           "#{Chef::Config[:knife][:namenode_port]}")
         end
       end
       
