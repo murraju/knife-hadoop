@@ -77,24 +77,6 @@ class Chef
         end
       end
       
-      def provisioner
-        @provisioner ||= begin
-          provisioner = UCSProvision.new(connection)
-        end 
-      end
-
-      def manager
-        ucs_manager = UCSManage.new(connection)
-        @manager ||= begin
-          manager = ucs_manager.discover_state
-        end 
-      end
-      
-      def destroyer
-        @destroyer ||= begin
-          destroyer = UCSDestroy.new(connection)
-        end 
-      end
       
       def locate_config_value(key)
         key = key.to_sym

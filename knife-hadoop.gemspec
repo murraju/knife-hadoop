@@ -4,7 +4,7 @@ require "knife-hadoop/version"
 
 Gem::Specification.new do |s|
   s.name        = "knife-hadoop"
-  s.version     = Knife::Ucs::VERSION
+  s.version     = Knife::Hadoop::VERSION
   s.platform    = Gem::Platform::RUBY
   s.has_rdoc = true
   s.extra_rdoc_files = ["README.md", "LICENSE" ]
@@ -22,5 +22,5 @@ Gem::Specification.new do |s|
   s.add_dependency "webhdfs"
   s.add_dependency "pg"
   s.add_dependency "sequel"
-  s.add_dependency "chef", "~>10.16.2"
+  s.add_dependency "chef"
 end
