@@ -5,7 +5,7 @@ This is a Chef Knife plugin for Hadoop. This plugin gives knife the ability to p
 
 Features:
 
-1. Only HDFS APIs are supported using the ruby webhdfs gem: https://github.com/kzk/webhdfs
+1. HDFS APIs (currently supported) using the ruby webhdfs gem: https://github.com/kzk/webhdfs. Extensions to webhdfs will be hosted at https://github.com/murraju/webhdfs
 	a. List Directories and Files
 	b. Snapshot to database (PostgreSQL for now)
 2. MapReduce management is in development with a wrapper gem using JRuby: http://github.com/murraju/mapredlib (will be released soon)
