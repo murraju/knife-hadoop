@@ -19,6 +19,14 @@ MapReduce management is in development with a wrapper gem using JRuby: http://gi
 	a. List jobs by ID [TODO]
 	b. Kills jobs by ID [TODO]
 
+
+Issues:
+
+1. The WebHDFS gem has bugs on net-http for create/delete
+2. Not all methods are exposed
+
+**There maybe a hadooplib gem in the future than consolidates all client functions for HDFS and MapReduce. Until then WebHDFS will be used.
+
 # Installation #
 
 Be sure you are running the latest version Chef. Versions earlier than 0.10.0 don't support plugins:

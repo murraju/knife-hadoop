@@ -47,7 +47,7 @@ class Chef
         :short => "-P PATH",
         :long => "--path PATH",
         :description => "The HDFS path - Directory or File to create",
-        :proc => Proc.new { |f| Chef::Config[:knife][:file] = f }
+        :proc => Proc.new { |f| Chef::Config[:knife][:path] = f }
 
       option :overwrite,
         :short => "-O OVERWRITE",
@@ -82,6 +82,7 @@ class Chef
         when 'dir'
           hdfs_connection.mkdir("#{Chef::Config[:knife][:path]}", :permission => "#{Chef::Config[:knife][:permission]}")
         when 'file'
+          ; debugger
           hdfs_connection.create("#{Chef::Config[:knife][:path]}", "#{Chef::Config[:knife][:data]}",
                                  :overwrite => "#{Chef::Config[:knife][:overwrite]}", :blocksize => "#{Chef::Config[:knife][:blocksize]}",
                                  :replication => "#{Chef::Config[:knife][:replication]}", :permission => "#{Chef::Config[:knife][:permission]}"
