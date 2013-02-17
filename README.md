@@ -1,10 +1,16 @@
 Knife Hadoop (beta)
 ===============
 
-This is a Chef Knife plugin for Hadoop. This plugin gives knife the ability to provision, list, and manage Hadoop. As of now:
+This is a Chef Knife plugin for Hadoop. This plugin gives knife the ability to provision, list, and manage Hadoop for Operators. 
 
-1. Only HDFS apis are supported using the ruby webhdfs gem: https://github.com/kzk/webhdfs
-2. MapReduce management is in development with a wrapper gem using JRuby: http://github.com/murraju/mapredlib 
+Features:
+
+1. Only HDFS APIs are supported using the ruby webhdfs gem: https://github.com/kzk/webhdfs
+	a. List Directories and Files
+	b. Snapshot to database (PostgreSQL for now)
+2. MapReduce management is in development with a wrapper gem using JRuby: http://github.com/murraju/mapredlib (will be released soon)
+	a. List jobs by ID [TODO]
+	b. Kills jobs by ID [TODO]
 
 # Installation #
 
@@ -14,7 +20,7 @@ Be sure you are running the latest version Chef. Versions earlier than 0.10.0 do
 
 This plugin is distributed as a Ruby Gem. To install it, run:
 
-    $ gem install knife-ucs
+    $ gem install knife-hadoop
 
 Depending on your system's configuration, you may need to run this command with root privileges.
 
@@ -22,32 +28,29 @@ Depending on your system's configuration, you may need to run this command with 
 
 In order to communicate with Cisco UCS XML API you will have to tell Knife the username, password and the IP address of the UCS Manager. The easiest way to accomplish this is to create some entries in your `knife.rb` file:
 
-    knife[:ucsm_username]   = "Your UCSM username"
-    knife[:ucsm_password] 	= "Your UCSM password"
-    knife[:ucsm_host]       = "Your IP address or UCSM hostname"
+	knife[:namenode_host]   = "namenode"
+	knife[:namenode_port]   = "port"
+	knife[:db_username] 	= "dbusername"
+	knife[:db_password] 	= "dbpassword"
+	knife[:db_host] 		= "dbhost"
+	knife[:db] 				= "db"
 
 If your knife.rb file will be checked into a SCM system (ie readable by others) you may want to read the values from environment variables:
 
-	knife[:ucsm_username]   = "#{ENV['UCSM_USERNAME']}"
-    knife[:ucsm_password] 	= "#{ENV['UCSM_PASSWORD']}"
-    knife[:ucsm_host]       = "#{ENV['UCSM_HOST']}"
+	knife[:namenode_host]   = "#{ENV['NAMENODE_HOST']}"
+	knife[:namenode_port]   = "#{ENV['NAMENODE_PORT']}"
+	knife[:db_username] 	= "#{ENV['DB_USERNAME']}"
+	knife[:db_password] 	= "#{ENV['DB_PASSWORD']}"
+	knife[:db_host] 		= "#{ENV['DB_HOST']}"
+	knife[:db] 				= "#{ENV['DB']}"
 
 
-
-# Subcommands #
-
-This plugin provides the following Knife subcommands. Specific command options can be found by invoking the subcommand with a `--help` flag
-
-Example usage can be found here -> https://github.com/murraju/knife-ucs/wiki
 
 # License #
 
 Author:: Murali Raju <murali.raju@appliv.com>
 
-Author:: Velankani Engineering Team <eng@velankani.net>
-
-Copyright:: Copyright (c) 2011 Murali Raju <murali.raju@appliv.com>
-Copyright:: Copyright (c) 2012 Velankani Information Systems, Inc.
+Copyright:: Copyright (c) 2012 Murali Raju <murali.raju@appliv.com>
 
 License:: Apache License, Version 2.0
 
