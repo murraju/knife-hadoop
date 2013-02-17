@@ -18,6 +18,7 @@
 require 'chef/knife'
 require 'webhdfs'
 require 'debugger'
+require 'sequel'
 
 class Chef
   class Knife
@@ -54,6 +55,30 @@ class Chef
             :long => "--namenode-port PORT",
             :description => "NameNode port",
             :proc => Proc.new { |key| Chef::Config[:knife][:namenode_port] = key }
+
+          option :db,
+            :short => "-D DATABASE",
+            :long => "--database DATABASE",
+            :description => "PostgreSQL Database to use for Hadoop Management Data",
+            :proc => Proc.new { |key| Chef::Config[:knife][:db] = key }
+
+          option :db_username,
+            :short => "-B DBUSERNAME",
+            :long => "--db-username DBUSERNAME",
+            :description => "PostgreSQL DB Username",
+            :proc => Proc.new { |key| Chef::Config[:knife][:db_username] = key }
+
+          option :db_password,
+            :short => "-C DBPASSWORD",
+            :long => "--db-password DBPASSWORD",
+            :description => "PostgreSQL DB Password",
+            :proc => Proc.new { |key| Chef::Config[:knife][:db_password] = key }
+
+          option :db_host,
+            :short => "-I DBHOST",
+            :long => "--db-host DBHOST",
+            :description => "PostgreSQL DB Host",
+            :proc => Proc.new { |key| Chef::Config[:knife][:db_host] = key }
           
         end
       end
@@ -68,15 +93,19 @@ class Chef
                                            "#{Chef::Config[:knife][:namenode_port]}")
         end
       end
-      
-      #Intialize objects
-      # def inventory
-      #   ucs_inventory = UCSInventory.new
-      #   @inventory ||= begin
-      #     inventory = ucs_inventory.discover(connection)
-      #   end
-      # end
-      
+
+      def db_connection
+        Chef::Log.debug("db: #{Chef::Config[:knife][:db]}")
+        Chef::Log.debug("db_username: #{Chef::Config[:knife][:db_username]}")
+        Chef::Log.debug("db_password: #{Chef::Config[:knife][:db_password]}")
+        Chef::Log.debug("db_host: #{Chef::Config[:knife][:db_host]}")
+        @db_connection ||= begin
+          db_connection = Sequel.connect("postgres://#{Chef::Config[:knife][:db_username]}"+':'+
+                                         "#{Chef::Config[:knife][:db_password]}"+'@'+
+                                         "#{Chef::Config[:knife][:db_host]}"+'/'+ 
+                                         "#{Chef::Config[:knife][:db]}")
+        end
+      end
       
       def locate_config_value(key)
         key = key.to_sym
