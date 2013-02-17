@@ -29,7 +29,7 @@ class Chef
         Chef::Knife::Bootstrap.load_deps
       end
 
-      banner "knife hadoop hdfs list (directory)"
+      banner "knife hadoop hdfs list (options)"
       
       option :dir,
         :short => "-D DIR",
