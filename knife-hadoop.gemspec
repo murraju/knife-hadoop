@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = ["README.md", "LICENSE" ]
   s.authors     = ["Murali Raju"]
   s.email       = ["murraju@appliv.com"]
-  s.homepage    = "https://github.com/velankanisys/knife-hadoop"
+  s.homepage    = "https://github.com/murraju/knife-hadoop"
   s.summary     = %q{Hadoop Chef Knife Plugin}
   s.description = s.summary
 

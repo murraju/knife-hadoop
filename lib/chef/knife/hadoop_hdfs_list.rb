@@ -1,5 +1,4 @@
 # Author:: Murali Raju (<murali.raju@appliv.com>)
-# Author:: Velankani Engineering <eng@velankani.net>
 # Copyright:: Copyright (c) 2012 Murali Raju.
 # License:: Apache License, Version 2.0
 #
