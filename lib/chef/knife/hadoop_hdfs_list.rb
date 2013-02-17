@@ -57,7 +57,7 @@ class Chef
         
         #There has to be a more elegant way to do the below iteration :-)
 
-        hdfs_layout = connection.list("#{Chef::Config[:knife][:dir]}") 
+        hdfs_layout = hdfs_connection.list("#{Chef::Config[:knife][:dir]}") 
         hdfs_layout.each do |item|
           hdfs_list << "#{Chef::Config[:knife][:dir]}"
           item.each do |k, v|

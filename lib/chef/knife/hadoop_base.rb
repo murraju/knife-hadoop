@@ -59,13 +59,13 @@ class Chef
         end
       end
 
-      def connection
+      def hdfs_connection
         Chef::Log.debug("username: #{Chef::Config[:knife][:namenode_username]}")
         Chef::Log.debug("password: #{Chef::Config[:knife][:namenode_password]}")
         Chef::Log.debug("host:     #{Chef::Config[:knife][:namenode_host]}")
         Chef::Log.debug("port:     #{Chef::Config[:knife][:namenode_port]}")
-        @connection ||= begin
-          connection = WebHDFS::Client.new("#{Chef::Config[:knife][:namenode_host]}", 
+        @hdfs_connection ||= begin
+          hdfs_connection = WebHDFS::Client.new("#{Chef::Config[:knife][:namenode_host]}", 
                                            "#{Chef::Config[:knife][:namenode_port]}")
         end
       end
