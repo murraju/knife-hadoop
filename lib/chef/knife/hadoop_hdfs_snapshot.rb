@@ -87,10 +87,11 @@ class Chef
                   :permission =>  "#{@permission}",
                   :replication => "#{@replication}",
                   :type =>  "#{@type}",
-                  :created_at => Time.now
+                  :created_at => @created_at = Time.now
                   ) 
-          end       
-        end        
+          end      
+        end
+        ui.msg ("Created snapshot in #{Chef::Config[:knife][:table]} at #{@created_at}")         
       end
     end
   end
