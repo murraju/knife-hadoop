@@ -50,7 +50,7 @@ class Chef
         type = "#{Chef::Config[:knife][:type]}".downcase
         case type
         when 'db'
-          ui.methods
+          ui.msg("Creating table #{Chef::Config[:knife][:table]}")
           db_connection.create_table "#{Chef::Config[:knife][:table]}" do
              String :directory
              String :accessTime
