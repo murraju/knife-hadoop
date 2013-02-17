@@ -9,7 +9,10 @@ HDFS APIs (currently supported) using the ruby webhdfs gem: https://github.com/k
 https://github.com/murraju/webhdfs
 	
 	a. List Directories and Files
-	b. Snapshot to a database (PostgreSQL for now)
+	b. Snapshot metadata information to a database (PostgreSQL for now). Useful for reporting and audits
+	c. Create Directories and Files
+	d. Update Files
+	e. Read Files
 
 MapReduce management is in development with a wrapper gem using JRuby: http://github.com/murraju/mapredlib (will be released soon)
 

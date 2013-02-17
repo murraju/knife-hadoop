@@ -37,17 +37,41 @@ class Chef
         :description => "The type <dir,file>",
         :proc => Proc.new { |f| Chef::Config[:knife][:type] = f }      
       
-      option :dir,
-        :short => "-D DIR",
-        :long => "--directory DIRECTORY",
-        :description => "The HDFS directory",
-        :proc => Proc.new { |f| Chef::Config[:knife][:dir] = f }
+      option :data,
+        :short => "-D DATA",
+        :long => "--data DATA",
+        :description => "The data to be populated into a file",
+        :proc => Proc.new { |f| Chef::Config[:knife][:data] = f }
 
-      option :perm,
+      option :path,
+        :short => "-P PATH",
+        :long => "--path PATH",
+        :description => "The HDFS path - Directory or File to create",
+        :proc => Proc.new { |f| Chef::Config[:knife][:file] = f }
+
+      option :overwrite,
+        :short => "-O OVERWRITE",
+        :long => "--overwrite OVERWRITE",
+        :description => "The overwrite bolean <true,fale>",
+        :proc => Proc.new { |f| Chef::Config[:knife][:overwrite] = f }
+
+      option :blocksize,
+        :short => "-B BLOCKSIZE",
+        :long => "--blocksize BLOCKSIZE",
+        :description => "The blocksize",
+        :proc => Proc.new { |f| Chef::Config[:knife][:blocksize] = f }
+
+      option :replication,
+        :short => "-R REPLICATION",
+        :long => "--replication REPLICATION",
+        :description => "The replication factor <n>",
+        :proc => Proc.new { |f| Chef::Config[:knife][:replication] = f }
+
+      option :permission,
         :short => "-P PERM",
         :long => "--permission PERMISSION",
         :description => "The permissions of the directory",
-        :proc => Proc.new { |f| Chef::Config[:knife][:perm] = f }
+        :proc => Proc.new { |f| Chef::Config[:knife][:permission] = f }
 
 
       def run
@@ -56,7 +80,12 @@ class Chef
         type = "#{Chef::Config[:knife][:type]}".downcase
         case type
         when 'dir'
-          hdfs_connection.mkdir("#{Chef::Config[:knife][:dir]}", :permission => "#{Chef::Config[:knife][:perm]}")
+          hdfs_connection.mkdir("#{Chef::Config[:knife][:path]}", :permission => "#{Chef::Config[:knife][:permission]}")
+        when 'file'
+          hdfs_connection.create("#{Chef::Config[:knife][:path]}", "#{Chef::Config[:knife][:data]}",
+                                 :overwrite => "#{Chef::Config[:knife][:overwrite]}", :blocksize => "#{Chef::Config[:knife][:blocksize]}",
+                                 :replication => "#{Chef::Config[:knife][:replication]}", :permission => "#{Chef::Config[:knife][:permission]}"
+                                 )
         else
           ui.error ("Incorrect options. Please use --help to list options.")
         end
