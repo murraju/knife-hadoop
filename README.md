@@ -1,7 +1,10 @@
-Knife UCS (beta)
+Knife Hadoop (beta)
 ===============
 
-This is a Chef Knife plugin for Cisco UCS. This plugin gives knife the ability to provision, list, and manage Cisco UCS. It leverages UCSlib (http://github.com/murraju/ucslib). 
+This is a Chef Knife plugin for Hadoop. This plugin gives knife the ability to provision, list, and manage Hadoop. As of now:
+
+1. Only HDFS apis are supported using the ruby webhdfs gem: https://github.com/kzk/webhdfs
+2. MapReduce management is in development with a wrapper gem using JRuby: http://github.com/murraju/mapredlib 
 
 # Installation #
 
