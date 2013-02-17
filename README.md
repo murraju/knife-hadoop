@@ -32,21 +32,23 @@ Depending on your system's configuration, you may need to run this command with 
 
 In order to communicate with Hadoop APIs, you will have to set parameters. The easiest way to accomplish this is to create some entries in your `knife.rb` file:
 
-	knife[:namenode_host]   = "namenode"
-	knife[:namenode_port]   = "port"
-	knife[:db_username] 	= "dbusername"
-	knife[:db_password] 	= "dbpassword"
-	knife[:db_host] 		= "dbhost"
-	knife[:db] 				= "db"
+	knife[:namenode_host]   	= "namenode"
+	knife[:namenode_port]   	= "port"
+	knife[:namenode_username] 	= "namenode_username"
+	knife[:db_username] 		= "dbusername"
+	knife[:db_password] 		= "dbpassword"
+	knife[:db_host] 			= "dbhost"
+	knife[:db] 					= "db"
 
 If your knife.rb file will be checked into a SCM system (ie readable by others) you may want to read the values from environment variables:
 
-	knife[:namenode_host]   = "#{ENV['NAMENODE_HOST']}"
-	knife[:namenode_port]   = "#{ENV['NAMENODE_PORT']}"
-	knife[:db_username] 	= "#{ENV['DB_USERNAME']}"
-	knife[:db_password] 	= "#{ENV['DB_PASSWORD']}"
-	knife[:db_host] 		= "#{ENV['DB_HOST']}"
-	knife[:db] 				= "#{ENV['DB']}"
+	knife[:namenode_host]   	= "#{ENV['NAMENODE_HOST']}"
+	knife[:namenode_port]   	= "#{ENV['NAMENODE_PORT']}"
+	knife[:namenode_username] 	= "#{ENV['NAMENODE_USERNAME']}"
+	knife[:db_username] 		= "#{ENV['DB_USERNAME']}"
+	knife[:db_password] 		= "#{ENV['DB_PASSWORD']}"
+	knife[:db_host] 			= "#{ENV['DB_HOST']}"
+	knife[:db] 					= "#{ENV['DB']}"
 
 
 

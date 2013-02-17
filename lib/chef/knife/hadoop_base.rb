@@ -90,7 +90,8 @@ class Chef
         Chef::Log.debug("port:     #{Chef::Config[:knife][:namenode_port]}")
         @hdfs_connection ||= begin
           hdfs_connection = WebHDFS::Client.new("#{Chef::Config[:knife][:namenode_host]}", 
-                                           "#{Chef::Config[:knife][:namenode_port]}")
+                                           "#{Chef::Config[:knife][:namenode_port]}",
+                                           "#{Chef::Config[:knife][:namenode_username]}")
         end
       end
 
