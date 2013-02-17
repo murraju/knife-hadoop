@@ -42,6 +42,7 @@ class Chef
         $stdout.sync = true
         
         hdfs_list = [
+          ui.color('Directory',        :bold),
           ui.color('accessTime',       :bold),
           ui.color('blockSize',        :bold),
           ui.color('group',            :bold),
@@ -54,40 +55,40 @@ class Chef
           ui.color('type',             :bold)
         ]
         
+        #There has to be a more elegant way to do the below iteration :-)
 
-        hdfs_layout = connection.list("#{Chef::Config[:knife][:dir]}")
+        hdfs_layout = connection.list("#{Chef::Config[:knife][:dir]}") 
         hdfs_layout.each do |item|
+          hdfs_list << "#{Chef::Config[:knife][:dir]}"
           item.each do |k, v|
             if "#{k}" == 'accessTime'
-               hdfs_list << item['accessTime']
+               hdfs_list << item['accessTime'].to_s
             elsif "#{k}" == 'blockSize'
-               hdfs_list << item['blockSize']
+               hdfs_list << item['blockSize'].to_s
             elsif "#{k}" == 'group'
-               hdfs_list << item['group']
+               hdfs_list << item['group'].to_s
             elsif "#{k}" == 'length'
-               hdfs_list << item['length']
+               hdfs_list << item['length'].to_s
             elsif "#{k}" == 'modificationTime'
-               hdfs_list << item['modificationTime']
+               hdfs_list << item['modificationTime'].to_s
             elsif "#{k}" == 'owner'
-               hdfs_list << item['owner']
+               hdfs_list << item['owner'].to_s
             elsif "#{k}" == 'pathSuffix'
-               hdfs_list << item['pathSuffix']
+               hdfs_list << item['pathSuffix'].to_s
             elsif "#{k}" == 'permission'
-               hdfs_list << item['permission']
+               hdfs_list << item['permission'].to_s
             elsif "#{k}" == 'replication'
-               hdfs_list << item['replication']
+               hdfs_list << item['replication'].to_s
             elsif "#{k}" == 'type'
-               hdfs_list << item['type']
+               hdfs_list << item['type'].to_s
             else
-              puts "WebHDFS is not responding. Please debug"
+              ui.error ("WebHDFS is not responding. Please debug")
             end
-          end
-
-        puts ui.list(hdfs_list, :uneven_columns_across, 10)
-        
+          end 
+        end
+        puts ui.list(hdfs_list, :uneven_columns_across, 11)
       end
     end
   end
 end
-
 

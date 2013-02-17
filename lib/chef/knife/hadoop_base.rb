@@ -18,6 +18,7 @@
 
 require 'chef/knife'
 require 'webhdfs'
+require 'debugger'
 
 class Chef
   class Knife
@@ -70,12 +71,12 @@ class Chef
       end
       
       #Intialize objects
-      def inventory
-        ucs_inventory = UCSInventory.new
-        @inventory ||= begin
-          inventory = ucs_inventory.discover(connection)
-        end
-      end
+      # def inventory
+      #   ucs_inventory = UCSInventory.new
+      #   @inventory ||= begin
+      #     inventory = ucs_inventory.discover(connection)
+      #   end
+      # end
       
       
       def locate_config_value(key)
