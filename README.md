@@ -1,4 +1,4 @@
-Knife Hadoop (beta)
+Knife Hadoop 
 ===============
 
 This is a Chef Knife plugin for Hadoop. This plugin gives knife the ability to provision, list, and manage Hadoop for Operators. 
