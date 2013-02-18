@@ -14,10 +14,6 @@ https://github.com/murraju/webhdfs
 	d. Update Files
 	e. Read Files
 
-MapReduce management is in development with a Hadoop Client gem using JRuby(will be released soon)
-
-	a. List jobs by ID [TODO]
-	b. Kills jobs by ID [TODO]
 
 
 Issues:
@@ -25,7 +21,9 @@ Issues:
 1. The WebHDFS gem has bugs on net-http for create/delete
 2. Not all methods are exposed
 
-**There maybe a hadooplib gem in the future than consolidates all client functions for HDFS and MapReduce. Until then WebHDFS will be used.
+
+**There maybe a hadooplib gem in the future than consolidates all client functions for HDFS and MapReduce. Until then WebHDFS will be used to support only HDFS
+related management.
 
 # Installation #
 
