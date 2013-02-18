@@ -14,7 +14,7 @@ https://github.com/murraju/webhdfs
 	d. Update Files
 	e. Read Files
 
-MapReduce management is in development with a wrapper gem using JRuby: http://github.com/murraju/mapredlib (will be released soon)
+MapReduce management is in development with a Hadoop Client gem using JRuby(will be released soon)
 
 	a. List jobs by ID [TODO]
 	b. Kills jobs by ID [TODO]
