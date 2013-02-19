@@ -13,6 +13,7 @@ https://github.com/murraju/webhdfs
 	c. Create Directories and Files
 	d. Update Files
 	e. Read Files
+	f. Start/Stop/List/Kill MapReduce Jobs - This version leverages the awesome work done by huahin: https://github.com/huahin 
 
 
 
@@ -22,9 +23,6 @@ Issues:
 2. Not all methods are exposed
 
 
-ToDo:
-
-MapReduce job management (in development)
 
 # Installation #
 
