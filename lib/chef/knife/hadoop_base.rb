@@ -20,6 +20,7 @@ require 'webhdfs'
 require 'debugger'
 require 'sequel'
 require 'rest-client'
+require 'json'
 
 class Chef
   class Knife
