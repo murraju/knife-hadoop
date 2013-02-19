@@ -22,8 +22,9 @@ Issues:
 2. Not all methods are exposed
 
 
-**There maybe a hadooplib gem in the future than consolidates all client functions for HDFS and MapReduce. Until then WebHDFS will be used to support only HDFS
-related management.
+ToDo:
+
+MapReduce job management (in development)
 
 # Installation #
 
