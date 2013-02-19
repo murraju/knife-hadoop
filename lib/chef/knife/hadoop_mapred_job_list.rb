@@ -34,11 +34,14 @@ class Chef
       option :type,
         :short => "-T TYPE",
         :long => "--type TYPE",
-        :description => "List MapReduce jobs <all,jobid>",
+        :description => "List MapReduce jobs <all,user>",
         :proc => Proc.new { |f| Chef::Config[:knife][:type] = f }
 
       def run
         $stdout.sync = true
+
+        Chef::Log.debug("username: #{Chef::Config[:knife][:mapred_mgmt_host]}")
+        Chef::Log.debug("password: #{Chef::Config[:knife][:mapred_mgmt_port]}")
 
         job_list = [
           ui.color('jobid',           :bold),
