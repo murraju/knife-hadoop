@@ -23,5 +23,6 @@ Gem::Specification.new do |s|
   s.add_dependency "pg"
   s.add_dependency "sequel"
   s.add_dependency "debugger"
+  s.add_dependency "rest-client"
   s.add_dependency "chef"
 end

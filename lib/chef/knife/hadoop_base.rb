@@ -19,6 +19,7 @@ require 'chef/knife'
 require 'webhdfs'
 require 'debugger'
 require 'sequel'
+require 'rest-client'
 
 class Chef
   class Knife
@@ -107,6 +108,7 @@ class Chef
                                          "#{Chef::Config[:knife][:db]}")
         end
       end
+
       
       def locate_config_value(key)
         key = key.to_sym

@@ -40,11 +40,13 @@ Depending on your system's configuration, you may need to run this command with 
 
 # Configuration #
 
-In order to communicate with Hadoop APIs, you will have to set parameters. The easiest way to accomplish this is to create some entries in your `knife.rb` file:
+In order to communicate with Hadoop and other APIs, you will have to set parameters. The easiest way to accomplish this is to create some entries in your `knife.rb` file:
 
 	knife[:namenode_host]   	= "namenode"
 	knife[:namenode_port]   	= "port"
 	knife[:namenode_username] 	= "namenode_username"
+	knife[:mapred_mgmt_host]    = "mapred_mgmt_host"
+	knife[:mapred_mgmt_port]    = "mapred_mgmt_port"
 	knife[:db_username] 		= "dbusername"
 	knife[:db_password] 		= "dbpassword"
 	knife[:db_host] 			= "dbhost"
@@ -55,6 +57,8 @@ If your knife.rb file will be checked into a SCM system (ie readable by others) 
 	knife[:namenode_host]   	= "#{ENV['NAMENODE_HOST']}"
 	knife[:namenode_port]   	= "#{ENV['NAMENODE_PORT']}"
 	knife[:namenode_username] 	= "#{ENV['NAMENODE_USERNAME']}"
+	knife[:mapred_mgmt_host]    = "#{ENV['MAPRED_MGMT_HOST']}"
+	knife[:mapred_mgmt_port]    = "#{ENV['MAPRED_MGMT_PORT']}"
 	knife[:db_username] 		= "#{ENV['DB_USERNAME']}"
 	knife[:db_password] 		= "#{ENV['DB_PASSWORD']}"
 	knife[:db_host] 			= "#{ENV['DB_HOST']}"

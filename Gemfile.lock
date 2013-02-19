@@ -5,6 +5,7 @@ PATH
       chef
       debugger
       pg
+      rest-client
       sequel
       webhdfs
 
