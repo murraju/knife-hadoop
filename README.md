@@ -18,7 +18,7 @@ https://github.com/murraju/webhdfs
 
 MapReduce APIs supported using the awesome work done by huahin: https://github.com/huahin
 
-	a. Start/Stop/List/Kill MapReduce Jobs by JobID and JobName
+	a. Start/List/Kill MapReduce Jobs by JobID and JobName
 
 
 
