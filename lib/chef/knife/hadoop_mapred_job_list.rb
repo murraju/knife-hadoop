@@ -31,11 +31,17 @@ class Chef
 
       banner "knife hadoop mapred job list (options)"
       
-      option :type,
-        :short => "-T TYPE",
-        :long => "--type TYPE",
+      option :filter,
+        :short => "-F FILTER",
+        :long => "--filter FILTER",
         :description => "List MapReduce jobs <all,user>",
-        :proc => Proc.new { |f| Chef::Config[:knife][:type] = f }
+        :proc => Proc.new { |f| Chef::Config[:knife][:filter] = f }
+
+      option :name,
+        :short => "-N NAME",
+        :long => "--name NAME",
+        :description => "List by User Name",
+        :proc => Proc.new { |f| Chef::Config[:knife][:name] = f }
 
       def run
         $stdout.sync = true
@@ -55,8 +61,8 @@ class Chef
           ui.color('user',            :bold)
         ]
         
-        type = "#{Chef::Config[:knife][:type]}".downcase
-        case type
+        filter = "#{Chef::Config[:knife][:filter]}".downcase
+        case filter
         when 'all'
           response = RestClient.get "http://#{Chef::Config[:knife][:mapred_mgmt_host]}:#{Chef::Config[:knife][:mapred_mgmt_port]}/job/list"
           collection = JSON.parse(response)
@@ -70,6 +76,22 @@ class Chef
             job_list << item['startTime']
             job_list << item['state']
             job_list << item['user']
+          end
+        when 'user'
+          response = RestClient.get "http://#{Chef::Config[:knife][:mapred_mgmt_host]}:#{Chef::Config[:knife][:mapred_mgmt_port]}/job/list"
+          collection = JSON.parse(response)
+          collection.each do |item|
+           if "#{Chef::Config[:knife][:name]}" == item['user']
+              job_list << item['jobid']
+              job_list << item['mapComplete']
+              job_list << item['name']
+              job_list << item['priority']
+              job_list << item['reduceComplete']
+              job_list << item['schedulingInfo']
+              job_list << item['startTime']
+              job_list << item['state']
+              job_list << item['user']
+            end
           end
         end
         puts ui.list(job_list, :uneven_columns_across, 9)
