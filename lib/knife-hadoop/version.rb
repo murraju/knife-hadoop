@@ -1,6 +1,6 @@
 module Knife
   module Hadoop
-    VERSION = "0.0.3"
+    VERSION = "0.0.4"
     MAJOR, MINOR, TINY = VERSION.split('.')
   end
 end

@@ -34,7 +34,7 @@ class Chef
       option :filter,
         :short => "-F FILTER",
         :long => "--filter FILTER",
-        :description => "Kill Job by either <jobid,jobname>",
+        :description => "Kill Job by either <id,name>",
         :proc => Proc.new { |f| Chef::Config[:knife][:filter] = f }
       
       option :jobid,
