@@ -3,7 +3,7 @@ Knife Hadoop
 
 This is a Chef Knife plugin for Hadoop. This plugin gives knife the ability to provision, list, and manage Hadoop for Operators. 
 
-Version 0.0.3
+Version 0.0.4
 
 Features:
 
