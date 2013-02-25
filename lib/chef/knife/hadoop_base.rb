@@ -58,6 +58,12 @@ class Chef
             :description => "NameNode port",
             :proc => Proc.new { |key| Chef::Config[:knife][:namenode_port] = key }
 
+          option :db_type,
+            :short => "-T DATABASETYPE",
+            :long => "--database-type DATABASETYPE",
+            :description => "PostgreSQL or Sqlite Database to use for Hadoop Management Data",
+            :proc => Proc.new { |key| Chef::Config[:knife][:db] = key }
+
           option :db,
             :short => "-D DATABASE",
             :long => "--database DATABASE",
@@ -98,15 +104,24 @@ class Chef
       end
 
       def db_connection
+        Chef::Log.debug("db: #{Chef::Config[:knife][:db_type]}")
         Chef::Log.debug("db: #{Chef::Config[:knife][:db]}")
         Chef::Log.debug("db_username: #{Chef::Config[:knife][:db_username]}")
         Chef::Log.debug("db_password: #{Chef::Config[:knife][:db_password]}")
         Chef::Log.debug("db_host: #{Chef::Config[:knife][:db_host]}")
-        @db_connection ||= begin
-          db_connection = Sequel.connect("postgres://#{Chef::Config[:knife][:db_username]}"+':'+
-                                         "#{Chef::Config[:knife][:db_password]}"+'@'+
-                                         "#{Chef::Config[:knife][:db_host]}"+'/'+ 
-                                         "#{Chef::Config[:knife][:db]}")
+        db_type = "#{Chef::Config[:knife][:db]}".downcase
+        case db_type
+        when 'postgres'
+          @db_connection ||= begin
+            db_connection = Sequel.connect("postgres://#{Chef::Config[:knife][:db_username]}"+':'+
+                                           "#{Chef::Config[:knife][:db_password]}"+'@'+
+                                           "#{Chef::Config[:knife][:db_host]}"+'/'+ 
+                                           "#{Chef::Config[:knife][:db]}")
+          end
+        when 'sqlite'
+          @db_connection ||= begin
+            db_connection = Sequel.sqlite("#{Chef::Config[:knife][:db]}")
+          end
         end
       end
 
