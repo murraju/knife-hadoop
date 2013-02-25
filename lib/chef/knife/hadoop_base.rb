@@ -104,12 +104,12 @@ class Chef
       end
 
       def db_connection
-        Chef::Log.debug("db: #{Chef::Config[:knife][:db_type]}")
+        Chef::Log.debug("db_type: #{Chef::Config[:knife][:db_type]}")
         Chef::Log.debug("db: #{Chef::Config[:knife][:db]}")
         Chef::Log.debug("db_username: #{Chef::Config[:knife][:db_username]}")
         Chef::Log.debug("db_password: #{Chef::Config[:knife][:db_password]}")
         Chef::Log.debug("db_host: #{Chef::Config[:knife][:db_host]}")
-        db_type = "#{Chef::Config[:knife][:db]}".downcase
+        db_type = "#{Chef::Config[:knife][:db_type]}".downcase
         case db_type
         when 'postgres'
           @db_connection ||= begin
