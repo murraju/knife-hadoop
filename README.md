@@ -3,7 +3,7 @@ Knife Hadoop
 
 This is a Chef Knife plugin for Hadoop. This plugin gives knife the ability to provision, list, and manage Hadoop for Operators. 
 
-Version 0.0.4
+Version 0.0.5
 
 Features:
 
@@ -11,7 +11,7 @@ HDFS APIs (currently supported) using the ruby webhdfs gem: https://github.com/k
 https://github.com/murraju/webhdfs
 	
 	a. List Directories and Files
-	b. Snapshot metadata information to a database (PostgreSQL for now). Useful for reporting and audits
+	b. Snapshot metadata information to a database (SQLlite default, PostgreSQL). Useful for reporting and audits
 	c. Create Directories and Files
 	d. Update Files
 	e. Read Files
@@ -26,6 +26,7 @@ Issues:
 
 1. The WebHDFS gem has bugs on net-http for create/delete
 2. Not all methods are exposed
+
 
 
 
