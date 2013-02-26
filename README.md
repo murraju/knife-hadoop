@@ -3,7 +3,15 @@ Knife Hadoop
 
 This is a Chef Knife plugin for Hadoop. This plugin gives knife the ability to provision, list, and manage Hadoop for Operators. 
 
+Version 0.0.6
+
+Sqlite by default for the DB
+
 Version 0.0.5
+
+PostgreSQL and SQlite
+
+
 
 Features:
 

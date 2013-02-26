@@ -1,12 +1,12 @@
 PATH
   remote: .
   specs:
-    knife-hadoop (0.0.1)
+    knife-hadoop (0.0.5)
       chef
       debugger
-      pg
       rest-client
       sequel
+      sqlite3
       webhdfs
 
 GEM
@@ -27,13 +27,13 @@ GEM
       rest-client (>= 1.0.4, < 1.7.0)
       yajl-ruby (~> 1.1)
     columnize (0.3.6)
-    debugger (1.3.1)
+    debugger (1.3.3)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.1.1)
-      debugger-ruby_core_source (~> 1.1.8)
+      debugger-ruby_core_source (~> 1.2.0)
     debugger-linecache (1.1.2)
       debugger-ruby_core_source (>= 1.1.1)
-    debugger-ruby_core_source (1.1.8)
+    debugger-ruby_core_source (1.2.0)
     erubis (2.7.0)
     highline (1.6.15)
     ipaddress (0.8.0)
@@ -59,16 +59,15 @@ GEM
       mixlib-shellout
       systemu
       yajl-ruby
-    pg (0.14.1)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     sequel (3.44.0)
+    sqlite3 (1.3.7)
     systemu (2.5.2)
     webhdfs (0.5.1)
     yajl-ruby (1.1.0)
 
 PLATFORMS
-  java
   ruby
 
 DEPENDENCIES
