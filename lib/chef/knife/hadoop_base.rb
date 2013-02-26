@@ -120,7 +120,8 @@ class Chef
           end
         when 'sqlite'
           @db_connection ||= begin
-            db_connection = Sequel.sqlite("#{Chef::Config[:knife][:db]}")
+            db_dir = Dir.mkdir(File.expand_path "~/.db/")
+            db_connection = Sequel.sqlite("#{db_dir}/" + "#{Chef::Config[:knife][:db]}")
           end
         end
       end
