@@ -1,9 +1,10 @@
 PATH
   remote: .
   specs:
-    knife-hadoop (0.0.6)
+    knife-hadoop (0.0.7)
       chef
       debugger
+      pg
       rest-client
       sequel
       sqlite3
@@ -59,6 +60,7 @@ GEM
       mixlib-shellout
       systemu
       yajl-ruby
+    pg (0.14.1)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     sequel (3.44.0)
