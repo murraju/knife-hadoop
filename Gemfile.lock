@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    knife-hadoop (0.0.5)
+    knife-hadoop (0.0.6)
       chef
       debugger
       rest-client
