@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    knife-hadoop (0.0.7)
+    knife-hadoop (0.0.8)
       chef
       debugger
       pg
@@ -38,7 +38,7 @@ GEM
     erubis (2.7.0)
     highline (1.6.15)
     ipaddress (0.8.0)
-    json (1.7.7)
+    json (1.5.5)
     mime-types (1.21)
     mixlib-authentication (1.3.0)
       mixlib-log
