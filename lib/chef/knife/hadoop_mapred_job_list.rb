@@ -24,6 +24,7 @@ class Chef
 
       deps do
         require 'readline'
+        require 'rest-client'
         require 'chef/json_compat'
         require 'chef/knife/bootstrap'
         Chef::Knife::Bootstrap.load_deps
