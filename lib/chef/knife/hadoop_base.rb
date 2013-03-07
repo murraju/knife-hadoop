@@ -87,6 +87,12 @@ class Chef
             :long => "--db-host DBHOST",
             :description => "PostgreSQL DB Host",
             :proc => Proc.new { |key| Chef::Config[:knife][:db_host] = key }
+
+            option :db_port,
+              :short => "-F DBPORT",
+              :long => "--db-port DBPORT",
+              :description => "PostgreSQL DB Port",
+              :proc => Proc.new { |key| Chef::Config[:knife][:db_port] = key }
           
         end
       end
@@ -109,14 +115,14 @@ class Chef
         Chef::Log.debug("db_username: #{Chef::Config[:knife][:db_username]}")
         Chef::Log.debug("db_password: #{Chef::Config[:knife][:db_password]}")
         Chef::Log.debug("db_host: #{Chef::Config[:knife][:db_host]}")
+        Chef::Log.debug("db_port: #{Chef::Config[:knife][:db_port]}")
         db_type = "#{Chef::Config[:knife][:db_type]}".downcase
         case db_type
         when 'postgres'
           @db_connection ||= begin
-            db_connection = Sequel.connect("postgres://#{Chef::Config[:knife][:db_username]}"+':'+
-                                           "#{Chef::Config[:knife][:db_password]}"+'@'+
-                                           "#{Chef::Config[:knife][:db_host]}"+'/'+ 
-                                           "#{Chef::Config[:knife][:db]}")
+            db_connection = Sequel.postgres("#{Chef::Config[:knife][:db]}", :user=>"#{Chef::Config[:knife][:db_username]}", 
+                                             :password => "#{Chef::Config[:knife][:db_password]}", :host => "#{Chef::Config[:knife][:db_host]}", 
+                                             :port => "#{Chef::Config[:knife][:db_port]}", :max_connections => 10)
           end
         when 'sqlite'
           @db_connection ||= begin

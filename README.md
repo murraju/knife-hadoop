@@ -3,6 +3,12 @@ Knife Hadoop
 
 This is a Chef Knife plugin for Hadoop. This plugin gives knife the ability to provision, list, and manage Hadoop for Operators. 
 
+Version 0.0.9
+
+Added PostgreSQL port option
+General clean up
+
+
 Version 0.0.8
 
 Bug Fixes.
@@ -13,7 +19,7 @@ HDFS APIs (currently supported) using the ruby webhdfs gem: https://github.com/k
 https://github.com/murraju/webhdfs
 	
 	a. List Directories and Files
-	b. Snapshot metadata information to a database (SQLlite default, PostgreSQL). Useful for reporting and audits
+	b. Snapshot metadata information to a database (PostgreSQL or Sqlite). Useful for reporting and audits
 	c. Create Directories and Files
 	d. Update Files
 	e. Read Files
@@ -28,6 +34,7 @@ Issues:
 
 1. The WebHDFS gem has bugs on net-http for create/delete
 2. Not all methods are exposed
+3. Has not been ported to Chef 11.x yet.
 
 
 
@@ -57,6 +64,7 @@ In order to communicate with Hadoop and other APIs, you will have to set paramet
 	knife[:db_username] 		= "dbusername"
 	knife[:db_password] 		= "dbpassword"
 	knife[:db_host] 			= "dbhost"
+	knife[:db_host] 			= "port"
 	knife[:db] 					= "db"
 
 If your knife.rb file will be checked into a SCM system (ie readable by others) you may want to read the values from environment variables:
@@ -70,6 +78,7 @@ If your knife.rb file will be checked into a SCM system (ie readable by others) 
 	knife[:db_username] 		= "#{ENV['DB_USERNAME']}"
 	knife[:db_password] 		= "#{ENV['DB_PASSWORD']}"
 	knife[:db_host] 			= "#{ENV['DB_HOST']}"
+	knife[:db_host] 			= "#{ENV['DB_PORT']}"
 	knife[:db] 					= "#{ENV['DB']}"
 
 
