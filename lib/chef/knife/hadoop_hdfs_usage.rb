@@ -54,18 +54,16 @@ class Chef
       def run
         $stdout.sync = true
         
-        hdfs_list = [
-          ui.color('Directory',        :bold),
-          ui.color('accessTime',       :bold),
-          ui.color('blockSize',        :bold),
-          ui.color('group',            :bold),
-          ui.color('length',           :bold),
-          ui.color('modificationTime', :bold),
-          ui.color('owner',            :bold),
-          ui.color('pathSuffix',       :bold),
-          ui.color('permission',       :bold),
-          ui.color('replication',      :bold),
-          ui.color('type',             :bold)
+        hdfs_usage_summary_list = [
+          ui.color('Configured Capacity',           :bold),
+          ui.color('Present Capacity',              :bold),
+          ui.color('DFS Remaining',                 :bold),
+          ui.color('DFS Used',                      :bold),
+          ui.color('DFS Used%',                     :bold),
+          ui.color('Under replicated blocks',       :bold),
+          ui.color('Blocks with corrupt replicas',  :bold),
+          ui.color('Missing blocks',                :bold),
+          ui.color('Datanodes available',           :bold)
         ]
         
         type = "#{Chef::Config[:knife][:type]}".downcase
@@ -74,22 +72,18 @@ class Chef
           Net::SSH.start( "#{Chef::Config[:knife][:namenode_host]}", 
                           "#{Chef::Config[:knife][:ssh_user]}", :password => "#{Chef::Config[:knife][:ssh_password]}" ) do|ssh|
             result = ssh.exec!('hadoop dfsadmin -report')
-            puts ''
-            puts result.match(/Configured Capacity: \d+(.*?) .*/)
-            puts result.match(/Present Capacity: \d+(.*?) .*/)
-            puts result.match(/DFS Remaining: \d+(.*?) .*/)
-            puts result.match(/DFS Used: \d+(.*?) .*/)
-            puts result.match(/DFS Used%: \d+(.*?).*/)
-            puts result.match(/Under replicated blocks: \d+(.*?)/)
-            puts result.match(/Blocks with corrupt replicas: \d+(.*?)/)
-            puts result.match(/Missing blocks: \d+(.*?)/)
-            puts result.match(/Datanodes available: \d+(.*?)/)
-            puts ''
+            hdfs_usage_summary_list << result.match(/Configured Capacity: \d+(.*?) .*/)
+            hdfs_usage_summary_list << result.match(/Present Capacity: \d+(.*?) .*/)
+            hdfs_usage_summary_list << result.match(/DFS Remaining: \d+(.*?) .*/)
+            hdfs_usage_summary_list << result.match(/DFS Used: \d+(.*?) .*/)
+            hdfs_usage_summary_list << result.match(/DFS Used%: \d+(.*?).*/)
+            hdfs_usage_summary_list << result.match(/Under replicated blocks: \d+(.*?)/)
+            hdfs_usage_summary_list << result.match(/Blocks with corrupt replicas: \d+(.*?)/)
+            hdfs_usage_summary_list << result.match(/Missing blocks: \d+(.*?)/)
+            hdfs_usage_summary_list << result.match(/Datanodes available: \d+(.*?)/)
           end
-        end
-        
-
-        #puts ui.list(hdfs_list, :uneven_columns_across, 11)
+           puts ui.list(hdfs_usage_summary_list, :uneven_columns_across, 9)
+        end  
       end
     end
   end
