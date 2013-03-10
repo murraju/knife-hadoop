@@ -72,15 +72,15 @@ class Chef
           Net::SSH.start( "#{Chef::Config[:knife][:namenode_host]}", 
                           "#{Chef::Config[:knife][:ssh_user]}", :password => "#{Chef::Config[:knife][:ssh_password]}" ) do|ssh|
             result = ssh.exec!('hadoop dfsadmin -report')
-            hdfs_usage_summary_list << result.match(/Configured Capacity: \d+(.*?) .*/)
-            hdfs_usage_summary_list << result.match(/Present Capacity: \d+(.*?) .*/)
-            hdfs_usage_summary_list << result.match(/DFS Remaining: \d+(.*?) .*/)
-            hdfs_usage_summary_list << result.match(/DFS Used: \d+(.*?) .*/)
-            hdfs_usage_summary_list << result.match(/DFS Used%: \d+(.*?).*/)
-            hdfs_usage_summary_list << result.match(/Under replicated blocks: \d+(.*?)/)
-            hdfs_usage_summary_list << result.match(/Blocks with corrupt replicas: \d+(.*?)/)
-            hdfs_usage_summary_list << result.match(/Missing blocks: \d+(.*?)/)
-            hdfs_usage_summary_list << result.match(/Datanodes available: \d+(.*?)/)
+            hdfs_usage_summary_list << result.match(/Configured Capacity: \d+(.*?)/).to_s.split(':')[1].gsub(/\s+/, "")
+            hdfs_usage_summary_list << result.match(/Present Capacity: \d+(.*?)/).to_s.split(':')[1].gsub(/\s+/, "")
+            hdfs_usage_summary_list << result.match(/DFS Remaining: \d+(.*?)/).to_s.split(':')[1].gsub(/\s+/, "")
+            hdfs_usage_summary_list << result.match(/DFS Used: \d+(.*?)/).to_s.split(':')[1].gsub(/\s+/, "")
+            hdfs_usage_summary_list << result.match(/DFS Used%: \d+(.*?).*/).to_s.split(':')[1].gsub(/\s+/, "")
+            hdfs_usage_summary_list << result.match(/Under replicated blocks: \d+(.*?)/).to_s.split(':')[1].gsub(/\s+/, "")
+            hdfs_usage_summary_list << result.match(/Blocks with corrupt replicas: \d+(.*?)/).to_s.split(':')[1].gsub(/\s+/, "")
+            hdfs_usage_summary_list << result.match(/Missing blocks: \d+(.*?)/).to_s.split(':')[1].gsub(/\s+/, "")
+            hdfs_usage_summary_list << result.match(/Datanodes available: \d+(.*?)/).to_s.split(':')[1].gsub(/\s+/, "")
           end
            puts ui.list(hdfs_usage_summary_list, :uneven_columns_across, 9)
         end  
