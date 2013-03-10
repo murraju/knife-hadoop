@@ -65,6 +65,18 @@ class Chef
           ui.color('Missing blocks',                :bold),
           ui.color('Datanodes available',           :bold)
         ]
+
+        hdfs_usage_node_list = [
+          ui.color('Data Node',                     :bold),
+          ui.color('Decommission Status',           :bold),
+          ui.color('Configured Capacity',           :bold),
+          ui.color('DFS Used',                      :bold),
+          ui.color('Non DFS Used',                  :bold),
+          ui.color('DFS Remaining',                 :bold),
+          ui.color('DFS Used%',                     :bold),
+          ui.color('DFS Remaining%',                :bold),
+          ui.color('Last contact',                  :bold)
+        ]        
         
         type = "#{Chef::Config[:knife][:type]}".downcase
         case type
@@ -82,7 +94,22 @@ class Chef
             hdfs_usage_summary_list << result.match(/Missing blocks: \d+(.*?)/).to_s.split(':')[1].gsub(/\s+/, "")
             hdfs_usage_summary_list << result.match(/Datanodes available: \d+(.*?)/).to_s.split(':')[1].gsub(/\s+/, "")
           end
-           puts ui.list(hdfs_usage_summary_list, :uneven_columns_across, 9)
+          puts ui.list(hdfs_usage_summary_list, :uneven_columns_across, 9)
+        when 'detail'
+          Net::SSH.start( "#{Chef::Config[:knife][:namenode_host]}", 
+                          "#{Chef::Config[:knife][:ssh_user]}", :password => "#{Chef::Config[:knife][:ssh_password]}" ) do|ssh|
+            result = ssh.exec!('hadoop dfsadmin -report')
+            hdfs_usage_node_list << result.match(/Name: \d+(.*?).*/).to_s.split(':')[1].gsub(/\s+/, "")
+            hdfs_usage_node_list << result.match(/Decommission Status : \w+(.*?).*/).to_s.split(':')[1].gsub(/\s+/, "")
+            hdfs_usage_node_list << result.match(/Configured Capacity: \d+(.*?)/).to_s.split(':')[1].gsub(/\s+/, "")
+            hdfs_usage_node_list << result.match(/DFS Used: \d+(.*?)/).to_s.split(':')[1].gsub(/\s+/, "")
+            hdfs_usage_node_list << result.match(/Non DFS Used: \d+(.*?)/).to_s.split(':')[1].gsub(/\s+/, "")
+            hdfs_usage_node_list << result.match(/DFS Remaining: \d+(.*?)/).to_s.split(':')[1].gsub(/\s+/, "")
+            hdfs_usage_node_list << result.match(/DFS Used%: \d+(.*?).*/).to_s.split(':')[1].gsub(/\s+/, "")
+            hdfs_usage_node_list << result.match(/DFS Remaining%: \d+(.*?).*/).to_s.split(':')[1].gsub(/\s+/, "")
+            hdfs_usage_node_list << result.match(/Last contact: \w+(.*?) .*/).to_s.split(':')[1] 
+          end
+          puts ui.list(hdfs_usage_node_list, :uneven_columns_across, 9)
         end  
       end
     end
