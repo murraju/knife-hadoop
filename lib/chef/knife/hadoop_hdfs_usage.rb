@@ -36,8 +36,14 @@ class Chef
       option :type,
         :short => "-T TYPE",
         :long => "--type TYPE",
-        :description => "The type <summary,detail>",
+        :description => "The type <summary,detail,report>",
         :proc => Proc.new { |f| Chef::Config[:knife][:type] = f }
+
+      option :dir,
+        :short => "-D DIRECTORY",
+        :long => "--hdfs-directory DIRECTORY",
+        :description => "The HDFS Directory to use",
+        :proc => Proc.new { |f| Chef::Config[:knife][:dir] = f }
 
       option :ssh_user,
         :short => "-U SSHUSER",
@@ -110,6 +116,17 @@ class Chef
             hdfs_usage_node_list << result.match(/Last contact: \w+(.*?) .*/).to_s.split(':')[1] 
           end
           puts ui.list(hdfs_usage_node_list, :uneven_columns_across, 9)
+        when 'report'
+          Net::SSH.start( "#{Chef::Config[:knife][:namenode_host]}", 
+                          "#{Chef::Config[:knife][:ssh_user]}", :password => "#{Chef::Config[:knife][:ssh_password]}" ) do|ssh|
+            result = ssh.exec!('hadoop dfsadmin -report')
+            file = "hdfs_usage_report_created_on_#{Time.now}.txt"
+            File.open("/tmp/#{file}", 'w') do |f|
+              f.write(result)
+              f.close
+            end
+            hdfs_connection.create("#{Chef::Config[:knife][:dir]}/#{file}", result)
+          end
         end  
       end
     end
