@@ -3,6 +3,9 @@ Knife Hadoop
 
 This is a Chef Knife plugin for Hadoop. This plugin gives knife the ability to provision, list, and manage Hadoop for Operators. 
 
+Version 0.1.0
+Chef 11.x
+
 Version 0.0.9
 
 Added PostgreSQL port option
@@ -32,9 +35,9 @@ MapReduce APIs supported using the awesome work done by huahin: https://github.c
 
 Issues:
 
-1. The WebHDFS gem has bugs on net-http for create/delete
-2. Not all methods are exposed
-3. Has not been ported to Chef 11.x yet.
+1. The WebHDFS gem has bugs on net-http for create/delete.
+2. Not all methods are exposed.
+3. HDFS usage still in development.
 
 
 
