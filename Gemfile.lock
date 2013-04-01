@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    knife-hadoop (0.0.8)
-      chef (> 10.24.0)
+    knife-hadoop (0.1.0)
+      chef (> 11.0.0)
       debugger
       pg
       rest-client
@@ -28,15 +28,14 @@ GEM
       rest-client (>= 1.0.4, < 1.7.0)
       yajl-ruby (~> 1.1)
     columnize (0.3.6)
-    debugger (1.4.0)
+    debugger (1.5.0)
       columnize (>= 0.3.1)
-      debugger-linecache (~> 1.1.1)
+      debugger-linecache (~> 1.2.0)
       debugger-ruby_core_source (~> 1.2.0)
-    debugger-linecache (1.1.2)
-      debugger-ruby_core_source (>= 1.1.1)
+    debugger-linecache (1.2.0)
     debugger-ruby_core_source (1.2.0)
     erubis (2.7.0)
-    highline (1.6.15)
+    highline (1.6.16)
     ipaddress (0.8.0)
     json (1.7.7)
     mime-types (1.21)
