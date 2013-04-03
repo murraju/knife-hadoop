@@ -51,6 +51,11 @@ Be sure you are running the latest version Chef. Versions earlier than 0.10.0 do
 This plugin is distributed as a Ruby Gem. To install it, run:
 
     $ gem install knife-hadoop
+	
+	For JRuby, make sure to have the following in ~/.jrubyc:
+	compat.version=1.9
+	cext.enabled=true
+	errno.backtrace=true
 
 Depending on your system's configuration, you may need to run this command with root privileges.
 
