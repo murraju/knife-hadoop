@@ -17,7 +17,6 @@
 
 require 'chef/knife'
 require 'webhdfs'
-require 'debugger'
 require 'sequel'
 require 'rest-client'
 require 'json'
