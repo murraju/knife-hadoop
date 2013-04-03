@@ -120,7 +120,7 @@ class Chef
           Net::SSH.start( "#{Chef::Config[:knife][:namenode_host]}", 
                           "#{Chef::Config[:knife][:ssh_user]}", :password => "#{Chef::Config[:knife][:ssh_password]}" ) do|ssh|
             result = ssh.exec!('hadoop dfsadmin -report')
-            file = "hdfs_usage_report_created_on_#{Time.now}.txt"
+            file = "hdfs_usage_report_created_on_#{Time.now.strftime('%Y%m%d-%H%M%S')}.txt"
             File.open("/tmp/#{file}", 'w') do |f|
               f.write(result)
               f.close
